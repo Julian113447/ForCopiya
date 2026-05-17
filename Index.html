@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(225, 112, 150, 0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 2px solid #ffb3c6;
+            transition: all 0.3s ease;
+        }
+
+        .heart {
+            font-size: 60px;
+            color: #ff4d6d;
+            animation: beat 1s infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        @keyframes beat {
+            to { transform: scale(1.15); }
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #4a4a4a;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Halaman Utama - Tombol */
+        .btn-main {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: 0.2s;
+        }
+
+        .btn-main:hover {
+            background-color: #ff758f;
+            transform: translateY(-2px);
+        }
+
+        /* Halaman Pertanyaan (Hidden Berkat JS) */
+        .hidden {
+            display: none;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            position: relative;
+            height: 50px;
+        }
+
+        .btn-choice {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KARTU 1: Sambutan -->
+    <div class="container" id="card1">
+        <div class="heart">❤️</div>
+        <h1>Halo Cantik</h1>
+        <p>Aku ada sesuatu yang mau aku tunjukkin ke kamu. Coba klik tombol di bawah ini ya!</p>
+        <button class="btn-main" onclick="nextPage()">Klik di Sini</button>
+    </div>
+
+    <!-- KARTU 2: Pertanyaan Interaktif -->
+    <div class="container hidden" id="card2">
+        <div class="heart">✨</div>
+        <h1>I Just Want to Ask...</h1>
+        <p>Apakah kamu tahu kalau kamu adalah alasan di balik senyumku setiap hari?</p>
+        <p><b>Kamu sayang gak sama aku?</b></p>
+        <div class="btn-container">
+            <button class="btn-choice" id="yesBtn" onclick="answerYes()">Sayang!</button>
+            <button class="btn-choice" id="noBtn" onmouseover="moveButton()">Nggak</button>
+        </div>
+    </div>
+
+    <!-- KARTU 3: Jawaban Akhir -->
+    <div class="container hidden" id="card3">
+        <div class="heart">❤️</div>
+        <h1>Yay! I Love You More!</h1>
+        <p>Makasih ya udah selalu ada buat aku. Nanti kita ketemu, besok kita mam bakso mercon kesukaan kamu!</p>
+        <p style="font-size: 12px; color: #aaa; margin-top: 20px;">~ Dari Pacarmu yang Paling Keren ~</p>
+    </div>
+
+    <script>
+        // Fungsi pindah dari Kartu 1 ke Kartu 2
+        function nextPage() {
+            document.getElementById('card1').classList.add('hidden');
+            document.getElementById('card2').classList.remove('hidden');
+        }
+
+        // Fungsi ketika tombol "Sayang!" diklik
+        function answerYes() {
+            document.getElementById('card2').classList.add('hidden');
+            document.getElementById('card3').classList.remove('hidden');
+        }
+
+        // Fitur jahil: Tombol "Nggak" akan kabur/berpindah tempat saat didekati kursor
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // Menghitung posisi acak di dalam area tombol agar tidak keluar layar
+            const x = Math.random() * 160 - 80; // Bergerak ke kiri/kanan sekitar 80px
+            const y = Math.random() * 120 - 60; // Bergerak ke atas/bawah sekitar 60px
+            
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
